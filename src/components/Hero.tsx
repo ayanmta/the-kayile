@@ -8,6 +8,7 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isVideoError, setIsVideoError] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -27,54 +28,73 @@ export default function Hero() {
       
       const handleLoadedData = () => {
         setIsVideoLoaded(true);
+        // Start playing once loaded
+        video.play().then(() => {
+          setIsVideoPlaying(true);
+        }).catch(() => {
+          // Fallback to image if video can't play
+          setIsVideoError(true);
+        });
       };
       
       const handleError = () => {
         setIsVideoError(true);
       };
+
+      const handleCanPlay = () => {
+        // Video is ready to play
+        if (!isVideoPlaying) {
+          video.play().then(() => {
+            setIsVideoPlaying(true);
+          }).catch(() => {
+            setIsVideoError(true);
+          });
+        }
+      };
       
       video.addEventListener('timeupdate', handleTimeUpdate);
       video.addEventListener('loadeddata', handleLoadedData);
       video.addEventListener('error', handleError);
+      video.addEventListener('canplay', handleCanPlay);
       
       return () => {
         video.removeEventListener('timeupdate', handleTimeUpdate);
         video.removeEventListener('loadeddata', handleLoadedData);
         video.removeEventListener('error', handleError);
+        video.removeEventListener('canplay', handleCanPlay);
       };
     }
-  }, []);
+  }, [isVideoPlaying]);
 
   return (
     <section 
       ref={containerRef}
       className="relative h-screen overflow-hidden bg-black"
     >
-      {/* Video Background */}
+      {/* Background Content */}
       <motion.div 
         className="absolute inset-0 w-full h-full"
         style={{ y }}
       >
-        {/* Loading State */}
-        {!isVideoLoaded && !isVideoError && (
-          <div className="absolute inset-0 bg-black flex items-center justify-center">
-            <div className="text-white text-center">
-              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
-              <p className="text-lg">Loading The Kayile Experience...</p>
-            </div>
-          </div>
-        )}
+        {/* Fallback Image - Shows initially and on error */}
+        <img
+          src="/upload/bannerback.png"
+          alt="The Kayile - Himalayan Retreat"
+          className={`w-full h-full object-cover object-center scale-110 transition-opacity duration-1000 ${
+            isVideoLoaded && isVideoPlaying ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
 
-        {/* Video Element - No Poster */}
+        {/* Video Element - Optimized */}
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
-          className={`w-full h-full object-cover object-center scale-110 transition-opacity duration-1000 ${
-            isVideoLoaded ? 'opacity-100' : 'opacity-0'
+          preload="metadata"
+          className={`absolute inset-0 w-full h-full object-cover object-center scale-110 transition-opacity duration-1000 ${
+            isVideoLoaded && isVideoPlaying ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <source src="/upload/mainvid.mp4" type="video/mp4" />
