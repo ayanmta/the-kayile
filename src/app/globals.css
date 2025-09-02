@@ -1,26 +1,1037 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Styles - Spotify Inspired */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: #121212;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(111, 78, 55, 0.1) 0%, transparent 50%);
 }
+
+/* Typography - Spotify Style */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Color Palette - Spotify Inspired */
+:root {
+  --color-black: #000000;
+  --color-dark: #121212;
+  --color-dark-gray: #181818;
+  --color-medium-gray: #282828;
+  --color-light-gray: #404040;
+  --color-white: #ffffff;
+  --color-coffee: #8b4513;
+  --color-mocha: #6f4e37;
+  --color-latte: #c8a27d;
+  --color-accent: #1db954;
+  --color-accent-dark: #1ed760;
+}
+
+/* Component Layer - Spotify Design System */
+@layer components {
+  /* 
+   * COLOR STRATEGY: Using only guaranteed-to-exist Tailwind colors
+   * - bg-black/90 (black with 90% opacity)
+   * - border-white/20 (white with 20% opacity) 
+   * - text-white/90 (white with 90% opacity)
+   * - bg-coffee, bg-mocha (your custom colors)
+   * - No gray-600, gray-700, gray-800 (may not exist in your Tailwind version)
+   */
+
+  /* Enhanced Button Variants - Spotify Style */
+  .btn-primary {
+    @apply bg-coffee hover:bg-mocha text-white px-8 py-4 text-base font-bold tracking-wide transition-all duration-300 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border-2 border-coffee text-coffee hover:bg-coffee hover:text-white px-8 py-4 text-base font-bold tracking-wide transition-all duration-300 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95;
+  }
+  
+  .btn-outline {
+    @apply bg-transparent border border-coffee/40 text-coffee hover:bg-coffee/10 hover:border-coffee px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 rounded-full;
+  }
+
+  /* Card Styling - Spotify Style */
+  .minimal-card {
+    @apply bg-black/90 border border-white/20 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 backdrop-blur-sm;
+  }
+  
+  .minimal-card-dark {
+    @apply bg-black/80 border border-white/30 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 backdrop-blur-lg;
+  }
+
+  /* Feature Icon Styling - Spotify Style */
+  .feature-icon-minimal {
+    @apply flex-shrink-0 w-14 h-14 bg-gradient-to-br from-coffee to-mocha border border-coffee/30 text-white flex items-center justify-center rounded-2xl shadow-lg;
+  }
+
+  /* Showcase Image Styling - Spotify Style */
+  .showcase-image {
+    @apply relative overflow-hidden rounded-2xl shadow-2xl;
+  }
+
+  /* Newspaper Layout - Spotify Grid System */
+  .newspaper-layout {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center;
+  }
+  
+  .newspaper-layout-reverse {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center lg:flex-row-reverse;
+  }
+
+  /* Newspaper Sections - Spotify Spacing */
+  .newspaper-section {
+    @apply py-24 lg:py-32;
+    margin: 0;
+  }
+  
+  .newspaper-section-light {
+    @apply bg-black/90 py-24 lg:py-32;
+    margin: 0;
+  }
+  
+  .newspaper-section-dark {
+    @apply bg-black py-24 lg:py-32;
+    margin: 0;
+  }
+
+  /* Newspaper Grid - Spotify Card Grid */
+  .newspaper-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  /* Typography Classes - Spotify Style */
+  .newspaper-heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight;
+  }
+  
+  .newspaper-heading-light {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight;
+  }
+  
+  .newspaper-text {
+    @apply text-lg lg:text-xl text-white/90 leading-relaxed font-medium;
+  }
+  
+  .newspaper-text-light {
+    @apply text-lg lg:text-xl text-white/80 leading-relaxed font-medium;
+  }
+  
+  .newspaper-text-dark {
+    @apply text-lg lg:text-xl text-white/90 leading-relaxed font-medium;
+  }
+  
+  .newspaper-text-dark-subtle {
+    @apply text-lg lg:text-xl text-white/70 leading-relaxed font-medium;
+  }
+  
+  .newspaper-text-light-strong {
+    @apply text-lg lg:text-xl text-white/95 leading-relaxed font-bold;
+  }
+  
+  .newspaper-text-light-medium {
+    @apply text-lg lg:text-xl text-white/85 leading-relaxed font-medium;
+  }
+
+  /* Feature Classes - Spotify Style */
+  .feature-title-minimal {
+    @apply text-xl lg:text-2xl font-bold text-white mb-4;
+  }
+  
+  .feature-content-minimal {
+    @apply flex-1;
+  }
+  
+  .feature-description-minimal {
+    @apply text-base lg:text-lg text-white/80 leading-relaxed font-medium;
+  }
+
+  /* Structural Elements - Spotify Style */
+  .structural-line {
+    @apply border-l-4 border-coffee/50 pl-8;
+  }
+  
+  .structural-accent {
+    @apply border-b-2 border-coffee/40 pb-4;
+  }
+
+  /* Container Classes - Spotify Style */
+  .container-newspaper {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  /* Aspect Ratios - Spotify Style */
+  .aspect-mobile {
+    aspect-ratio: 4/3;
+  }
+  
+  .aspect-square {
+    aspect-ratio: 1/1;
+  }
+  
+  .aspect-wide {
+    aspect-ratio: 16/9;
+  }
+
+  /* Touch Targets - Spotify Style */
+  .touch-target {
+    @apply min-w-[48px] min-h-[48px];
+  }
+
+  /* Dividers - Spotify Style */
+  .accent-divider {
+    @apply w-20 h-1 bg-gradient-to-r from-transparent via-coffee to-transparent mx-auto rounded-full;
+  }
+
+  /* Spotify-Style Cards */
+  .spotify-card {
+    @apply bg-black/90 hover:bg-black/80 border border-white/20 p-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  }
+
+  .spotify-card-large {
+    @apply bg-black/90 hover:bg-black/80 border border-white/20 p-8 rounded-3xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl;
+  }
+
+  /* Spotify-Style Buttons */
+  .spotify-btn {
+    @apply bg-coffee hover:bg-mocha text-white px-8 py-4 text-base font-bold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl;
+  }
+
+  .spotify-btn-outline {
+    @apply bg-transparent border-2 border-coffee text-coffee hover:bg-coffee hover:text-white px-8 py-4 text-base font-bold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95;
+  }
+}
+
+/* Hero Section - Enhanced Himalayan Landscape */
+.hero-section {
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #0f0f0f 50%, #1a1a1a 75%, #0a0a0a 100%);
+}
+
+/* Video Container - Professional Enhancement */
+.hero-section video {
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.05);
+  filter: contrast(1.15) saturate(1.1) brightness(1.05) hue-rotate(5deg);
+}
+
+/* Primary Landscape Enhancement - Clean, Dynamic Gradients */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Sky Enhancement - Himalayan Blue */
+    linear-gradient(180deg, 
+      rgba(25, 55, 109, 0.4) 0%, 
+      rgba(25, 55, 109, 0.2) 15%, 
+      transparent 30%),
+    /* Mountain Peak Enhancement */
+    radial-gradient(ellipse 80% 40% at 50% 30%, 
+      rgba(139, 69, 19, 0.3) 0%, 
+      rgba(111, 78, 55, 0.2) 40%, 
+      transparent 70%),
+    /* Valley Depth Enhancement */
+    radial-gradient(ellipse 100% 60% at 50% 80%, 
+      rgba(0, 0, 0, 0.5) 0%, 
+      rgba(0, 0, 0, 0.3) 50%, 
+      transparent 80%),
+    /* Atmospheric Perspective */
+    linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.2) 0%, 
+      transparent 20%, 
+      transparent 80%, 
+      rgba(0, 0, 0, 0.2) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Secondary Enhancement Layer - Subtle Textures */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Subtle Mountain Texture */
+    radial-gradient(circle at 30% 40%, 
+      rgba(139, 69, 19, 0.1) 0%, 
+      transparent 50%),
+    radial-gradient(circle at 70% 60%, 
+      rgba(111, 78, 55, 0.1) 0%, 
+      transparent 50%),
+    /* Dynamic Light Rays */
+    linear-gradient(45deg, 
+      transparent 40%, 
+      rgba(255, 255, 255, 0.03) 50%, 
+      transparent 60%),
+    linear-gradient(-45deg, 
+      transparent 40%, 
+      rgba(255, 255, 255, 0.03) 50%, 
+      transparent 60%);
+  background-size: 200px 200px, 150px 150px, 100px 100px, 100px 100px;
+  background-position: 0 0, 50px 50px, 0 0, 0 0;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+  animation: subtleDrift 20s ease-in-out infinite;
+}
+
+/* Subtle Drift Animation for Dynamic Feel */
+@keyframes subtleDrift {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% { 
+    transform: translate(-2px, -1px) scale(1.01);
+    opacity: 0.7;
+  }
+  50% { 
+    transform: translate(1px, -2px) scale(1.005);
+    opacity: 0.65;
+  }
+  75% { 
+    transform: translate(-1px, 1px) scale(1.015);
+    opacity: 0.75;
+  }
+}
+
+/* Enhanced Grain Effect - Professional Film Look */
+.hero-section .grain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 1px, transparent 1px),
+    radial-gradient(circle at 25% 25%, rgba(139,69,19,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(111,78,55,0.05) 1px, transparent 1px);
+  background-size: 25px 25px, 15px 15px, 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+  animation: professionalGrain 12s steps(8) infinite;
+  mix-blend-mode: overlay;
+}
+
+@keyframes professionalGrain {
+  0%, 100% { 
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translate(-3px, -2px) rotate(0.5deg);
+    opacity: 0.4;
+  }
+  50% { 
+    transform: translate(-1px, -3px) rotate(-0.5deg);
+    opacity: 0.35;
+  }
+  75% { 
+    transform: translate(-2px, -1px) rotate(0.3deg);
+    opacity: 0.45;
+  }
+}
+
+/* Soft Focus Effect - Cinematic Depth */
+.hero-section .soft-focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(0.3px);
+  background: 
+    radial-gradient(circle at 50% 50%, 
+      transparent 0%, 
+      rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Enhanced Content Visibility - Professional Typography */
+.hero-section .content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Typography - Enhanced Mountain Aesthetic */
+.hero-section h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-shadow: 
+    0 4px 8px rgba(0,0,0,0.6),
+    0 2px 4px rgba(139,69,19,0.3);
+}
+
+.hero-section p {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+  text-shadow: 
+    0 2px 4px rgba(0,0,0,0.5),
+    0 1px 2px rgba(139,69,19,0.2);
+}
+
+/* Badge Styling - Enhanced Mountain Theme */
+.hero-section .inline-block {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 8px 16px rgba(0,0,0,0.4),
+    0 4px 8px rgba(139,69,19,0.2);
+  border-radius: 50px;
+}
+
+/* Smooth Section Transitions */
+.section-smooth {
+  margin: 0;
+  padding: 0;
+}
+
+.section-smooth + .section-smooth {
+  margin-top: 0;
+}
+
+/* Coming Soon Section - Spotify Style */
+.coming-soon-section {
+  padding: 6rem 1.5rem;
+  margin: 0;
+  background: linear-gradient(135deg, #000000 0%, #121212 50%, #000000 100%);
+}
+
+@media (min-width: 640px) {
+  .coming-soon-section {
+    padding: 8rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .coming-soon-section {
+    padding: 10rem 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .coming-soon-section {
+    padding: 12rem 3rem;
+  }
+}
+
+/* Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .animate-scroll {
+    animation-duration: 40s;
+  }
+}
+
+/* Enhanced Logo Styling - Kayile Brand Centerpiece (SVG Optimized) */
+.hero-logo {
+  position: relative;
+  display: inline-block;
+  /* Center the logo perfectly */
+  text-align: center;
+}
+
+.hero-logo img {
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.7));
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* SVG-specific optimizations */
+  shape-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
+  /* Enhanced centerpiece styling */
+  transform-origin: center center;
+}
+
+.hero-logo:hover img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 30px 60px rgba(139, 69, 19, 0.5));
+}
+
+.hero-logo .glow-effect {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  /* Enhanced glow for centerpiece */
+  filter: blur(20px);
+}
+
+.hero-logo:hover .glow-effect {
+  opacity: 1;
+}
+
+/* Navigation Logo Styling (SVG Optimized) */
+.nav-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Enhanced navigation logo styling */
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-logo:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.nav-logo img {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+  transition: all 0.3s ease;
+  /* SVG-specific optimizations */
+  shape-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
+}
+
+.nav-logo:hover img {
+  transform: scale(1.15);
+  filter: drop-shadow(0 12px 24px rgba(139, 69, 19, 0.4));
+}
+
+.nav-logo .nav-glow {
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  filter: blur(15px);
+}
+
+.nav-logo:hover .nav-glow {
+  opacity: 1;
+}
+
+/* SVG Logo Specific Enhancements */
+.hero-logo img,
+.nav-logo img {
+  /* Ensure crisp rendering on all devices */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  /* Maintain aspect ratio */
+  aspect-ratio: 1;
+  /* Smooth scaling */
+  transform-origin: center center;
+}
+
+/* Logo Animation Keyframes - Enhanced for Centerpiece */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-4px) rotate(0.8deg) scale(1.01);
+  }
+  50% {
+    transform: translateY(-2px) rotate(-0.6deg) scale(1.005);
+  }
+  75% {
+    transform: translateY(-3px) rotate(0.4deg) scale(1.015);
+  }
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.7));
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+    filter: drop-shadow(0 30px 60px rgba(139, 69, 19, 0.3));
+  }
+}
+
+/* Logo Entrance Animation - Enhanced */
+.logo-entrance {
+  animation: logoFloat 8s ease-in-out infinite, logoGlow 6s ease-in-out infinite;
+}
+
+/* Extra Large Logo Specific Enhancements - Forced Massive Size */
+.hero-logo {
+  position: relative;
+  display: inline-block;
+  /* Center the logo perfectly */
+  text-align: center;
+  /* Ensure logo dominates the Hero section */
+  z-index: 10;
+}
+
+.hero-logo img {
+  /* FORCE MASSIVE SIZE - Override SVG constraints */
+  width: 500px !important;
+  height: 500px !important;
+  min-width: 500px !important;
+  min-height: 500px !important;
+  max-width: none !important;
+  max-height: none !important;
+  
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8));
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* SVG-specific optimizations */
+  shape-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
+  /* Enhanced centerpiece styling */
+  transform-origin: center center;
+  /* Ensure logo is the dominant element */
+  display: block;
+  margin: 0 auto;
+  /* Force SVG to scale properly */
+  object-fit: contain;
+  object-position: center;
+}
+
+.hero-logo:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 40px 80px rgba(139, 69, 19, 0.6));
+}
+
+.hero-logo .glow-effect {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.5) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+  /* Enhanced glow for extra large logo */
+  filter: blur(30px);
+}
+
+.hero-logo:hover .glow-effect {
+  opacity: 1;
+}
+
+/* Responsive Logo Sizing - MASSIVE (Bigger than Navigation Bar) */
+@media (max-width: 640px) {
+  .hero-logo img {
+    width: 400px !important;
+    height: 400px !important;
+    min-width: 400px !important;
+    min-height: 400px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-logo img {
+    width: 600px !important;
+    height: 600px !important;
+    min-width: 600px !important;
+    min-height: 600px !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-logo img {
+    width: 800px !important;
+    height: 800px !important;
+    min-width: 800px !important;
+    min-height: 800px !important;
+  }
+}
+
+/* High-DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-logo img,
+  .nav-logo img {
+    /* SVG will automatically look crisp on high-DPI displays */
+    image-rendering: auto;
+  }
+}
+
+/* Enhanced Logo Container Styling - Extra Large */
+.hero-logo .relative {
+  position: relative;
+  display: inline-block;
+  /* Add subtle background for better contrast */
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  padding: 40px;
+  transition: all 0.5s ease;
+  /* Ensure logo is centered and properly spaced */
+  margin: 0 auto;
+}
+
+.hero-logo:hover .relative {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  transform: scale(1.02);
+}
+
+/* Logo Tagline - Enhanced for Extra Large Logo */
+.hero-logo .logo-tagline {
+  margin-top: 24px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* Minimal Navigation Styling - White Background */
+.nav-minimal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-minimal img {
+  filter: brightness(0); /* Make SVG black */
+  transition: all 0.2s ease;
+}
+
+.nav-minimal:hover img {
+  transform: scale(1.05);
+}
+
+/* Navigation Logo Container */
+.nav-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-logo-container:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Navigation Enhancements */
+.mobile-nav-item {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateX(4px);
+}
+
+/* Minimal Button Styling */
+.nav-cta {
+  background: black;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-cta:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.02);
+}
+
+/* Navigation Transitions */
+.nav-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scroll State Styling */
+.nav-scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-transparent {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Minimal Hover Effects */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: black;
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Force SVG Logo to Maximum Size - Override All Constraints */
+.hero-logo img,
+.hero-logo svg {
+  /* CRITICAL: Override SVG internal dimensions */
+  width: 800px !important;
+  height: 800px !important;
+  min-width: 800px !important;
+  min-height: 800px !important;
+  max-width: none !important;
+  max-height: none !important;
+  
+  /* Force display properties */
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  
+  /* Override any inline SVG styles */
+  transform: none !important;
+  scale: 1 !important;
+  
+  /* Ensure proper rendering */
+  shape-rendering: geometricPrecision !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Mobile Responsive Override */
+@media (max-width: 640px) {
+  .hero-logo img,
+  .hero-logo svg {
+    width: 400px !important;
+    height: 400px !important;
+    min-width: 400px !important;
+    min-height: 400px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-logo img,
+  .hero-logo svg {
+    width: 600px !important;
+    height: 600px !important;
+    min-width: 600px !important;
+    min-height: 600px !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-logo img,
+  .hero-logo svg {
+    width: 800px !important;
+    height: 800px !important;
+    min-width: 800px !important;
+    min-height: 800px !important;
+  }
+}
+
+/* Additional Force Override for SVG Elements */
+.hero-logo svg {
+  /* Override SVG viewBox constraints */
+  viewBox: "0 0 800 800" !important;
+  /* Force dimensions */
+  width: 800px !important;
+  height: 800px !important;
+}
+
+/* Logo Journey - Hero Centerpiece Over Video */
+.hero-logo-journey img,
+.hero-logo-journey svg {
+  /* CRITICAL: Override SVG internal dimensions */
+  width: 1000px !important;
+  height: 1000px !important;
+  min-width: 1000px !important;
+  min-height: 1000px !important;
+  max-width: none !important;
+  max-height: none !important;
+  
+  /* Force display properties */
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  
+  /* Override any inline SVG styles */
+  transform: none !important;
+  scale: 1 !important;
+  
+  /* Ensure proper rendering */
+  shape-rendering: geometricPrecision !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Mobile Responsive Override for Journey Logo */
+@media (max-width: 640px) {
+  .hero-logo-journey img,
+  .hero-logo-journey svg {
+    width: 500px !important;
+    height: 500px !important;
+    min-width: 500px !important;
+    min-height: 500px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-logo-journey img,
+  .hero-logo-journey svg {
+    width: 700px !important;
+    height: 700px !important;
+    min-width: 700px !important;
+    min-height: 700px !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-logo-journey img,
+  .hero-logo-journey svg {
+    width: 1000px !important;
+    height: 1000px !important;
+    min-width: 1000px !important;
+    min-height: 1000px !important;
+  }
+}
+
+/* Hero Logo - Centerpiece Over Video */
+.hero-logo-journey {
+  /* Force massive logo size */
+  width: 1000px !important;
+  height: 1000px !important;
+  min-width: 1000px !important;
+  min-height: 1000px !important;
+  max-width: none !important;
+  max-height: none !important;
+  
+  /* Ensure proper display */
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  
+  /* Override any SVG constraints */
+  transform: none !important;
+  scale: 1 !important;
+  
+  /* Rendering quality */
+  shape-rendering: geometricPrecision !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Mobile Responsive Hero Logo */
+@media (max-width: 640px) {
+  .hero-logo-journey {
+    width: 500px !important;
+    height: 500px !important;
+    min-width: 500px !important;
+    min-height: 500px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-logo-journey {
+    width: 700px !important;
+    height: 700px !important;
+    min-width: 700px !important;
+    min-height: 700px !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-logo-journey {
+    width: 1000px !important;
+    height: 1000px !important;
+    min-width: 1000px !important;
+    min-height: 1000px !important;
+  }
+}
+
+/* Navigation Logo - Contained Within Nav */
+.nav-logo-container img,
+.nav-logo-container svg {
+  /* Standard navigation logo size */
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: none !important;
+  max-height: none !important;
+  
+  /* Ensure proper display */
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* Navigation Logo - Big Size */
+.nav-logo-container img,
+.nav-logo-container svg {
+  /* Big navigation logo size */
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  max-width: none !important;
+  max-height: none !important;
+  
+  /* Ensure proper display */
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* Large navigation logo for desktop */
+@media (min-width: 1024px) {
+  .nav-logo-container img,
+  .nav-logo-container svg {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+  }
+}
+
