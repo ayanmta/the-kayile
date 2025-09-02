@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isVideoError, setIsVideoError] = useState(false);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -23,8 +25,23 @@ export default function Hero() {
         }
       };
       
+      const handleLoadedData = () => {
+        setIsVideoLoaded(true);
+      };
+      
+      const handleError = () => {
+        setIsVideoError(true);
+      };
+      
       video.addEventListener('timeupdate', handleTimeUpdate);
-      return () => video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.addEventListener('loadeddata', handleLoadedData);
+      video.addEventListener('error', handleError);
+      
+      return () => {
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+        video.removeEventListener('loadeddata', handleLoadedData);
+        video.removeEventListener('error', handleError);
+      };
     }
   }, []);
 
@@ -38,17 +55,29 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full"
         style={{ y }}
       >
+        {/* Loading State */}
+        {!isVideoLoaded && !isVideoError && (
+          <div className="absolute inset-0 bg-black flex items-center justify-center">
+            <div className="text-white text-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+              <p className="text-lg">Loading The Kayile Experience...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Video Element - No Poster */}
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover object-center scale-110"
-          poster="/upload/house1.png"
+          preload="auto"
+          className={`w-full h-full object-cover object-center scale-110 transition-opacity duration-1000 ${
+            isVideoLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         >
           <source src="/upload/mainvid.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
         
         {/* Video Overlay */}
